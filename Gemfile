@@ -9,6 +9,7 @@ gem "rspec-sinatra"
 gem 'database_cleaner'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
+gem 'bcrypt'
 
 ruby '2.3.1'
 

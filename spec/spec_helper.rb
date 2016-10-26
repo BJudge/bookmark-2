@@ -8,8 +8,10 @@ ENV["RACK_ENV"] = "test"
 require 'capybara/rspec'
 require './app/models/link'
 require './app/app'
+require './app/models/user'
 Capybara.app = BookmarkManager
 require 'database_cleaner'
+require 'web_helper'
 
 RSpec.configure do |config|
   # Everything in this block runs once before all the tests run
