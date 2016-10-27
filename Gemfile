@@ -10,6 +10,7 @@ gem 'database_cleaner'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'bcrypt'
+gem 'sinatra-flash'
 
 ruby '2.3.1'
 
