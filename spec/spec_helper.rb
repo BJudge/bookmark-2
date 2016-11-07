@@ -12,6 +12,11 @@ require './app/models/user'
 Capybara.app = BookmarkManager
 require 'database_cleaner'
 require 'web_helper'
+require_relative 'helpers/sessions'
+
+RSpec.configure do |config|
+  config.include SessionHelpers
+end
 
 RSpec.configure do |config|
   # Everything in this block runs once before all the tests run

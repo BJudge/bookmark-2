@@ -5,6 +5,7 @@ require 'sinatra/flash'
 
 
 class BookmarkManager < Sinatra::Base
+  use Rack::MethodOverride
 
   enable :sessions
   set :session_secret, 'super secret'
@@ -36,8 +37,8 @@ class BookmarkManager < Sinatra::Base
     end
   end
 
-  get '/session/new' do
-    erb:'sessions/new'
+  get '/sessions/new' do
+    erb :'sessions/new'
   end
 
   post '/sessions' do
@@ -50,6 +51,13 @@ class BookmarkManager < Sinatra::Base
       erb :'sessions/new'
     end
   end
+
+  delete '/sessions' do
+    session[:user_id] = nil
+    flash.keep[:notice] = 'goodbye!'
+    redirect to '/links'
+  end
+
 
   get '/links' do
     @links = Link.all
