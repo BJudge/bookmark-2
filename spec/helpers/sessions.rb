@@ -15,4 +15,10 @@ module SessionHelpers
       fill_in :password_confirmation, with: password_confirmation
       click_button 'Sign up'
     end
+
+  def recover_password
+    visit '/users/recover'
+    fill_in :email, with: 'bart@email.com'
+    click_button 'Submit'
   end
+end

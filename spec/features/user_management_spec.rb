@@ -43,11 +43,11 @@ feature 'User sign in' do
                 password_confirmation: 'secret1234')
   end
 
-  scenario 'with corret credentials' do
+  scenario 'with correct credentials' do
     sign_in(email: user.email, password: user.password)
     expect(page).to have_content 'Welcome, #{user.email}'
   end
-  
+
 end
 
 feature 'User signs out' do
@@ -65,5 +65,28 @@ feature 'User signs out' do
     expect(page).to have_content('goodbye!')
     expect(page).not_to have_content('Welcome, test@test.com')
   end
+end
 
+feature 'Resetting Password' do
+  scenario 'When I forget my password I can see a link to reset' do
+    visit '/sessions/new'
+    click_link 'I forgot my password'
+    expect(page).to have_content("Please enter your email address")
+  end
+
+  scenario 'When I enter my email I am told to check my inbox' do
+    recover_password
+    expect(page).to have_content 'Thanks, Please check your inbox for the link'
+  end
+
+  scenario 'assigned a reset token to the user when they recover' do
+    sign_up
+    expect{recover_password}.to change{User.first.password_token}
+  end
+
+  it 'saves a password recovery token when we generate a token' do
+    expect{user.generate_token}.to change{user.password_token}
+  end
+
+  
 end
